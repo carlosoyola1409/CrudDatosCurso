@@ -75,6 +75,7 @@
                         <td colspan="2">
                             <input type="submit" value="Editar" name="f_editar" />
                             <input type="hidden" name="f_accion" value="M2" />
+                            <input type="hidden" name="f_idestudiante" value="<% out.print(s_idestudiante); %>" />
                         </td>
                     </tr>
                 </tbody>
@@ -165,6 +166,24 @@
                         consulta =  "   insert into "
                                     + " estudiante(nombre, apellidos, dni, codigo, estado) "
                                     + " values ('"+ s_nombre +"','"+ s_apellidos +"','"+ s_dni +"','"+ s_codigo +"','"+ s_estado +"')";
+                        //out.print(consulta);
+                        pst = cn.prepareStatement(consulta);
+                        pst.executeUpdate();
+                    }else if (s_accion.equals("M2")) {
+                        s_nombre = request.getParameter("f_nombre");
+                        s_apellidos = request.getParameter("f_apellidos");
+                        s_dni = request.getParameter("f_dni");
+                        s_codigo = request.getParameter("f_codigo");
+                        s_estado = request.getParameter("f_estado");
+                        consulta = " update  estudiante  "
+                                + "  set  "
+                                + "  nombre = '"+ s_nombre +"',"
+                                + "  apellidos = '"+ s_apellidos +"',"
+                                + "  dni = '"+ s_dni +"', "
+                                + "  codigo = '"+ s_codigo +"', "
+                                + "  estado = '"+ s_estado +"' "
+                                + "  where "
+                                + "  idestudiante = "+ s_idestudiante +"; ";
                         //out.print(consulta);
                         pst = cn.prepareStatement(consulta);
                         pst.executeUpdate();
